@@ -7,12 +7,12 @@ public class BulletSpawner : MonoBehaviour
     [SerializeField] private Transform _target;
     [SerializeField] float _delay;
 
-    void Start()
+    private void Start()
     {
         StartCoroutine(Spawn());
     }
 
-    IEnumerator Spawn()
+    private IEnumerator Spawn()
     {
         WaitForSeconds wait = new(_delay);
 

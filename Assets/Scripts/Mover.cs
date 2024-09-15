@@ -9,7 +9,7 @@ public class Mover : MonoBehaviour
 
     private int _currentPointIndex;
 
-    void Start()
+    private void Start()
     {
         _points = new Transform[_path.childCount];
 
@@ -19,20 +19,17 @@ public class Mover : MonoBehaviour
 
     public void Update()
     {
-        Transform target = _points[_currentPointIndex];
+        Transform pointTarget = _points[_currentPointIndex];
 
-        transform.LookAt(target.transform.position);
-        transform.position = Vector3.MoveTowards(transform.position, target.position, _speed * Time.deltaTime);
-        
-        if (transform.position == target.position)
+        transform.LookAt(pointTarget.transform.position);
+        transform.position = Vector3.MoveTowards(transform.position, pointTarget.position, _speed * Time.deltaTime);
+
+        if (transform.position == pointTarget.position)
             ChangePoint();
     }
 
     public void ChangePoint()
     {
-        _currentPointIndex++;
-
-        if (_currentPointIndex == _points.Length)
-            _currentPointIndex = 0;
+        _currentPointIndex = (_currentPointIndex + 1) % _points.Length;
     }
 }
